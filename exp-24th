@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <math.h>
+#define BLOCK_SIZE 8192  
+#define POINTER_SIZE 4   
+#define DIRECT_BLOCKS 12
+#define INDIRECT_BLOCK_POINTER_COUNT (BLOCK_SIZE / POINTER_SIZE)
+int main() {
+    int single_indirect_blocks = INDIRECT_BLOCK_POINTER_COUNT;
+    int double_indirect_blocks = INDIRECT_BLOCK_POINTER_COUNT * INDIRECT_BLOCK_POINTER_COUNT;
+    int triple_indirect_blocks = pow(INDIRECT_BLOCK_POINTER_COUNT, 3);
+    int max_direct_size = DIRECT_BLOCKS * BLOCK_SIZE;
+    int max_single_indirect_size = single_indirect_blocks * BLOCK_SIZE;
+    int max_double_indirect_size = double_indirect_blocks * BLOCK_SIZE;
+    int max_triple_indirect_size = triple_indirect_blocks * BLOCK_SIZE;
+    int max_file_size = max_direct_size + max_single_indirect_size + max_double_indirect_size + max_triple_indirect_size;
+     printf("Maximum file size: %d bytes (%.2f GB)\n", max_file_size, (float)max_file_size / (1024 * 1024 * 1024));
+     return 0;
+}
